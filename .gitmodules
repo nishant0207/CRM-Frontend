@@ -1,0 +1,3 @@
+[submodule "xeno-crm-frontend"]
+	path = xeno-crm-frontend
+	url = https://github.com/nishant0207/CRM-Campaign-Management-App.git
