@@ -10,29 +10,34 @@ const CreateCampaign = ({ onCampaignCreated }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+  
     const conditions = {};
     if (spending) conditions.spending = Number(spending);
     if (visits) conditions.visits = Number(visits);
     if (lastVisit) conditions.lastVisit = Number(lastVisit);
-
+  
     const campaignData = {
       name,
       message,
       conditions,
     };
-
+  
     try {
-      await createCampaign(campaignData);
+      const response = await createCampaign(campaignData);
+      console.log('Campaign Created:', response.data); // Log success response
       alert('Campaign created successfully');
-      onCampaignCreated();  // Refresh the campaign list
+      onCampaignCreated(); // Refresh the campaign list
       setName('');
       setMessage('');
       setSpending('');
       setVisits('');
       setLastVisit('');
     } catch (error) {
-      console.error('Error creating campaign:', error);
+      console.error('Error creating campaign:', error.response || error.message); // Log error
+      if (error.response) {
+        console.error('Response Status:', error.response.status);
+        console.error('Response Data:', error.response.data);
+      }
       alert('Failed to create campaign');
     }
   };

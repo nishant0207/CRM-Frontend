@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-// const API_URL = 'http://localhost:3000/api';
+// Base API URL
 const API_URL = 'https://crm-campaign-management-app.onrender.com/api';
 
 const axiosInstance = axios.create({
@@ -9,9 +9,9 @@ const axiosInstance = axios.create({
 
 // Interceptor to attach Firebase token to every request
 axiosInstance.interceptors.request.use(config => {
-  const token = localStorage.getItem('firebaseToken'); // Fetch token from localStorage
+  const token = localStorage.getItem('firebaseToken');
   if (token) {
-    config.headers.Authorization = `Bearer ${token}`; // Attach token to Authorization header
+    config.headers.Authorization = `Bearer ${token}`;
   }
   return config;
 }, error => {
@@ -20,6 +20,11 @@ axiosInstance.interceptors.request.use(config => {
 
 // Export individual API functions
 export const fetchCampaigns = () => axiosInstance.get('/campaigns');
+
 export const createCampaign = (data) => axiosInstance.post('/campaign', data);
+
 export const sendMessages = (campaignId) => axiosInstance.post(`/campaign/${campaignId}/send`);
+
 export const updateDeliveryReceipt = (logId) => axiosInstance.post(`/communication/${logId}/receipt`);
+
+export default axiosInstance;

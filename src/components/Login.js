@@ -10,13 +10,13 @@ const Login = ({ onLogin }) => {
 
         // Fetch the Firebase token after successful login
         auth.currentUser.getIdToken()
-        .then(token => {
-          console.log('Firebase Token:', token);
-          localStorage.setItem('firebaseToken', token); // Store token in localStorage
-        })
-          .catch(error => {
-            console.error('Error fetching Firebase token:', error);
-          });
+  .then((token) => {
+    console.log('Firebase Token:', token); // Log token
+    localStorage.setItem('firebaseToken', token); // Store token
+  })
+  .catch((error) => {
+    console.error('Error fetching Firebase token:', error); // Log error
+  });
       })
       .catch(error => {
         console.error("Error logging in:", error);

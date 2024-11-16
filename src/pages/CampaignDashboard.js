@@ -8,11 +8,18 @@ const CampaignDashboard = () => {
 
   const loadCampaigns = () => {
     fetchCampaigns()
-      .then(response => {
-        console.log(response.data);  // Log the data for debugging
-        setCampaigns(response.data.campaigns);
-      })
-      .catch(error => console.error('Error fetching campaigns:', error));
+  .then((response) => {
+    console.log('Campaigns fetched successfully:', response.data);
+    setCampaigns(response.data.campaigns);
+  })
+  .catch((error) => {
+    console.error('Error fetching campaigns:', error.response || error.message);
+    if (error.response) {
+      console.error('Response Status:', error.response.status);
+      console.error('Response Data:', error.response.data);
+    }
+    alert('Failed to fetch campaigns');
+  });
   };
 
   useEffect(() => {
