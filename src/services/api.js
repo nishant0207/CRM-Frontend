@@ -2,10 +2,23 @@ import axios from 'axios';
 
 const API_URL = 'http://localhost:3000/api';
 
-export const fetchCampaigns = () => axios.get(`${API_URL}/campaigns`);
+const axiosInstance = axios.create({
+  baseURL: API_URL,
+});
 
-export const createCampaign = (data) => axios.post(`${API_URL}/campaign`, data);
+// Interceptor to attach Firebase token to every request
+axiosInstance.interceptors.request.use(config => {
+  const token = localStorage.getItem('firebaseToken'); // Fetch token from localStorage
+  if (token) {
+    config.headers.Authorization = `Bearer ${token}`; // Attach token to Authorization header
+  }
+  return config;
+}, error => {
+  return Promise.reject(error);
+});
 
-export const sendMessages = (campaignId) => axios.post(`${API_URL}/campaign/${campaignId}/send`);
-
-export const updateDeliveryReceipt = (logId) => axios.post(`${API_URL}/communication/${logId}/receipt`);
+// Export individual API functions
+export const fetchCampaigns = () => axiosInstance.get('/campaigns');
+export const createCampaign = (data) => axiosInstance.post('/campaign', data);
+export const sendMessages = (campaignId) => axiosInstance.post(`/campaign/${campaignId}/send`);
+export const updateDeliveryReceipt = (logId) => axiosInstance.post(`/communication/${logId}/receipt`);
