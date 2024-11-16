@@ -1,3 +1,4 @@
+// App.js
 import React, { useState } from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';  // Use Routes instead of Switch
 import CampaignDashboard from './pages/CampaignDashboard';

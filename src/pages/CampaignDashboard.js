@@ -1,3 +1,4 @@
+// CampaignDashboard.js
 import React, { useEffect, useState } from 'react';
 import { fetchCampaigns, sendMessages } from '../services/api';
 import CreateCampaign from './CreateCampaign';
@@ -6,20 +7,19 @@ import { Link } from 'react-router-dom'; // Add Link import here
 const CampaignDashboard = () => {
   const [campaigns, setCampaigns] = useState([]);
 
-  const loadCampaigns = () => {
-    fetchCampaigns()
-  .then((response) => {
-    console.log('Campaigns fetched successfully:', response.data);
-    setCampaigns(response.data.campaigns);
-  })
-  .catch((error) => {
-    console.error('Error fetching campaigns:', error.response || error.message);
-    if (error.response) {
-      console.error('Response Status:', error.response.status);
-      console.error('Response Data:', error.response.data);
+  const loadCampaigns = async () => {
+    try {
+      const response = await fetchCampaigns();
+      console.log('Campaigns fetched successfully:', response.data); // Debug success
+      setCampaigns(response.data.campaigns);
+    } catch (error) {
+      console.error('Error fetching campaigns:', error.response || error.message); // Debug error
+      if (error.response) {
+        console.error('Response Status:', error.response.status);
+        console.error('Response Data:', error.response.data);
+      }
+      alert('Failed to fetch campaigns. Check console for details.');
     }
-    alert('Failed to fetch campaigns');
-  });
   };
 
   useEffect(() => {
@@ -38,13 +38,13 @@ const CampaignDashboard = () => {
   return (
     <div>
       <h1>Campaign Dashboard</h1>
-      
+
       {/* Link to the Campaign Statistics page */}
       <Link to="/statistics">View Campaign Statistics</Link>
-      
+
       {/* Campaign Creation Form */}
       <CreateCampaign onCampaignCreated={loadCampaigns} />
-      
+
       <table>
         <thead>
           <tr>

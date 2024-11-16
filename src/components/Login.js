@@ -1,3 +1,4 @@
+// Login.js
 import React from 'react';
 import { auth, googleProvider } from '../firebaseConfig';
 import { signInWithPopup } from 'firebase/auth';
@@ -10,13 +11,13 @@ const Login = ({ onLogin }) => {
 
         // Fetch the Firebase token after successful login
         auth.currentUser.getIdToken()
-  .then((token) => {
-    console.log('Firebase Token:', token); // Log token
-    localStorage.setItem('firebaseToken', token); // Store token
-  })
-  .catch((error) => {
-    console.error('Error fetching Firebase token:', error); // Log error
-  });
+          .then((token) => {
+            console.log('Firebase Token:', token); // Debug token
+            localStorage.setItem('firebaseToken', token);
+          })
+          .catch((error) => {
+            console.error('Error fetching Firebase token:', error); // Debug error
+          });
       })
       .catch(error => {
         console.error("Error logging in:", error);

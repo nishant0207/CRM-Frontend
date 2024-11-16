@@ -1,3 +1,4 @@
+// CampaignStatistics.js
 import React, { useEffect, useState } from 'react';
 import { fetchCampaigns } from '../services/api';
 
