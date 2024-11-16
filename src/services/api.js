@@ -1,6 +1,7 @@
 import axios from 'axios';
 
-const API_URL = 'http://localhost:3000/api';
+// const API_URL = 'http://localhost:3000/api';
+const API_URL = 'https://crm-campaign-management-app.onrender.com/api';
 
 const axiosInstance = axios.create({
   baseURL: API_URL,
