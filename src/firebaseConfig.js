@@ -5,13 +5,13 @@ import { getAnalytics } from 'firebase/analytics';
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyCT4NNuG0IGe-xmYtmvHhsgB2bO6Lsy99M",
-  authDomain: "xeno-crm-karan.firebaseapp.com",
-  projectId: "xeno-crm-karan",
-  storageBucket: "xeno-crm-karan.firebasestorage.app",
-  messagingSenderId: "748410233618",
-  appId: "1:748410233618:web:7cef0610eafb1d805709cb",
-  measurementId: "G-7FFF8CQHK0"
+  apiKey: process.env.apiKey,
+  authDomain: process.env.authDomain,
+  projectId: process.env.projectId,
+  storageBucket: process.env.storageBucket,
+  messagingSenderId: process.env.messagingSenderId,
+  appId: process.env.appId,
+  measurementId: process.env.measurementId
 };
 
 // Initialize Firebase
